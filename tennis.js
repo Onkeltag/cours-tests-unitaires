@@ -1,7 +1,7 @@
 function Jeu(){
 	this.joueurs = ['Le joueur A','Le joueur B'];
 
-	this.marque = [0,0];	
+	this.marque = [0,0];
 }
 
 Jeu.prototype.score = function () {
@@ -21,7 +21,7 @@ Jeu.prototype.score = function () {
 				}
 			}
 			else {
-				throw 'score non conforme';
+				throw 'méthode score()';
 			}
 		}
 		catch (err) {
@@ -30,6 +30,7 @@ Jeu.prototype.score = function () {
 	}
 
 Jeu.prototype.addPoint = function(id) {
+	try {
 		//Le joueur joueurs[id] marque un point :
 		if (this.marque[id] === 0 || this.marque[id] === 15) {
 			//Situtation classique
@@ -52,16 +53,22 @@ Jeu.prototype.addPoint = function(id) {
 			else if (this.marque[1-id] === 50) {
 				//Situation d'avantage pour l'adversaire
 				this.marque[1-id] = 40;
-			}
-			else if(this.marque[id] === 50) {
-				//Situation d'avantage
-				return ('jeu ' + this.joueurs[id]);
-			}
+			}			
 		}
-	}	
+		else if(this.marque[id] === 50) {
+			//Situation d'avantage
+			return ('jeu ' + this.joueurs[id]);
+		}
+		else {
+			throw 'méthode addPoint()';
+		}
+	}
+	catch (err) {
+		return 'Erreur : ' + err;
+	}
+	$('#score').html(jeu.score());
+}	
 
 var jeu = new Jeu();
-
-$('#itsInA').click(jeu.addPoint(0));
-$('#itsInB').click(jeu.addPoint(1));
-$('#score').html(jeu.score());
+$('#itsInA').click(jeu.addPoint.bind(jeu, 0));
+$('#itsInB').click(jeu.addPoint.bind(jeu, 1));

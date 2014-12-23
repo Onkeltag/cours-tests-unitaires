@@ -10,7 +10,7 @@ test('InitialisationApp', function( assert ) {
 test('AfficherScoreDebutDePartie', function() { var jeu = new Jeu() ;
 equal("0-0",jeu.score()) ; });
 
-test('AfficherScore', function() { var jeu = new Jeu() ;
+test('AfficherScore', function(assert) { var jeu = new Jeu() ;
 	jeu.marque=[0,15]; equal("0-15",jeu.score()) ; 
 	jeu.marque=[0,30]; equal("0-30",jeu.score()) ; 
 	jeu.marque=[0,40]; equal("0-40",jeu.score()) ; 
@@ -28,11 +28,12 @@ test('AfficherScore', function() { var jeu = new Jeu() ;
 	jeu.marque=[40,40]; equal("Egalité",jeu.score()) ; 
 	jeu.marque=[40,50]; equal("Avantage Le joueur B",jeu.score()) ;   
 	jeu.marque=[50,40]; equal("Avantage Le joueur A",jeu.score()) ;  
-	jeu.marque=[12,15]; equal("Erreur : score non conforme",jeu.score()) ;
-	jeu.marque=[0,15.5]; equal("Erreur : score non conforme",jeu.score()) ; 
-	jeu.marque=['quinze','quinze']; equal("Erreur : score non conforme",jeu.score()) ; 
+	jeu.marque=[12,15]; equal("Erreur : méthode score()",jeu.score()) ;
+	jeu.marque=[0,15.5]; equal("Erreur : méthode score()",jeu.score()) ; 
+	jeu.marque=['quinze','quinze']; equal("Erreur : méthode score()",jeu.score()) ;
+	assert.throws(function(){ throw 'méthode score()'}) ;
 });
-test('AjouterPoint', function() {
+test('AjouterPoint', function(assert) {
 	var jeu = new Jeu();
 	jeu.addPoint(0) ; equal(15,jeu.marque[0]);
 	jeu.addPoint(1) ; equal(15,jeu.marque[1]);
@@ -41,8 +42,17 @@ test('AjouterPoint', function() {
 	jeu.addPoint(1) ; equal(40,jeu.marque[1]);
 	jeu.addPoint(0) ; equal(40,jeu.marque[0]);
 	jeu.addPoint(1) ; equal(50,jeu.marque[1]);
-	jeu.addPoint(1) ; equal('jeu Le joueur B');
+	jeu.addPoint(1) ; equal('jeu Le joueur B', jeu.addPoint(1));
 
+	jeu.marque = [40,40] ; jeu.addPoint(0) ; equal(50,jeu.marque[0]);
+	jeu.marque = [50,40] ; jeu.addPoint(0) ; equal('jeu Le joueur A', jeu.addPoint(0));
+	jeu.marque = [50,40] ; jeu.addPoint(1) ; equal(40,jeu.marque[0]);
+	jeu.marque = [40,50] ; jeu.addPoint(0) ; equal(40,jeu.marque[1]);
+
+	assert.throws(function(){ throw 'méthode addPoint()'}) ;
+	jeu.marque=['quinze',15]; equal("Erreur : méthode addPoint()",jeu.addPoint(0)) ;
+	jeu.marque=[12,15]; equal("Erreur : méthode addPoint()",jeu.addPoint(0)) ;
+	jeu.marque=[0,13.5]; equal("Erreur : méthode addPoint()",jeu.addPoint(1)) ;
 })
 
 //test('TestFonctionSave', function() { } )
