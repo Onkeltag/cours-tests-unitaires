@@ -6,9 +6,7 @@ test('InitialisationApp', function( assert ) {
 	assert.expect(0);
 	var jeu = new Jeu() ;
 });
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
+
 test('AfficherScoreDebutDePartie', function() { var jeu = new Jeu() ;
 equal("0-0",jeu.score()) ; });
 
@@ -47,17 +45,4 @@ test('AjouterPoint', function() {
 
 })
 
-
 //test('TestFonctionSave', function() { } )
-=======
->>>>>>> Stashed changes
-
-test('AfficherScoreDebutDePartie', function() {
-var jeu = new Jeu() ;
-equal("0-0",jeu.score()) ;
-<<<<<<< Updated upstream
-});
-=======
-});
->>>>>>> FETCH_HEAD
->>>>>>> Stashed changes
