@@ -42,10 +42,10 @@ test('AjouterPoint', function(assert) {
 	jeu.addPoint(1) ; equal(40,jeu.marque[1]);
 	jeu.addPoint(0) ; equal(40,jeu.marque[0]);
 	jeu.addPoint(1) ; equal(50,jeu.marque[1]);
-	jeu.addPoint(1) ; equal('jeu Le joueur B', jeu.addPoint(1));
+	equal('jeu Le joueur B', jeu.addPoint(1));
 
 	jeu.marque = [40,40] ; jeu.addPoint(0) ; equal(50,jeu.marque[0]);
-	jeu.marque = [50,40] ; jeu.addPoint(0) ; equal('jeu Le joueur A', jeu.addPoint(0));
+	jeu.marque = [50,40] ; equal('jeu Le joueur A', jeu.addPoint(0));
 	jeu.marque = [50,40] ; jeu.addPoint(1) ; equal(40,jeu.marque[0]);
 	jeu.marque = [40,50] ; jeu.addPoint(0) ; equal(40,jeu.marque[1]);
 
