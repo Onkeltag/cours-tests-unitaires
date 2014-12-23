@@ -57,7 +57,7 @@ Jeu.prototype.addPoint = function(id) {
 		}
 		else if(this.marque[id] === 50) {
 			//Situation d'avantage
-			return ('jeu ' + this.joueurs[id]);
+			console.log ('jeu ' + this.joueurs[id]);
 		}
 		else {
 			throw 'méthode addPoint()';
